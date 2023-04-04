@@ -18,7 +18,6 @@ int FillMatrix(int matrix[ROW][COLUMN], int ROW, int COLUMN)
 
 }
 
-
 void PrintMatrix(int matrix[ROW][COLUMN], int ROW, int COLUMN)
 {
 	for (int i = 0; i < ROW; i++) {
@@ -28,7 +27,7 @@ void PrintMatrix(int matrix[ROW][COLUMN], int ROW, int COLUMN)
 		cout << endl;
 	}
 }
-int SumOfElements(int matrix[ROW][COLUMN]) {
+int FindSumOfElements(int matrix[ROW][COLUMN]) {
 	int firstNumber, secondNumber;
 	cout << '\n' << "Введи номер столбца первого числа" << '\n';
 	cin >> firstNumber;
@@ -42,21 +41,22 @@ int SumOfElements(int matrix[ROW][COLUMN]) {
 	}
 	return sumOfElements;
 }
-double SumOfUpperTriangularMatrix(int matrix[ROW][COLUMN]) {
+double FindSumOfUpperTriangularMatrix(int matrix[ROW][COLUMN]) {
 
 	double sumOfUpperTriangularMatrix = 0;
 	for (int i = 0; i < ROW; i++) {
 		for (int j = 0; j < COLUMN; j++) {
 			if (i >= j)
 			{
-				sumOfUpperTriangularMatrix = sumOfUpperTriangularMatrix + matrix[i][j];
+				sumOfUpperTriangularMatrix = sumOfUpperTriangularMatrix +
+					matrix[i][j];
 			}
 		}
 	}
 	cout << '\n';
 	return sumOfUpperTriangularMatrix;
 }
-string HasPositive(int matrix[ROW][COLUMN]) {
+string CheckHasPositive(int matrix[ROW][COLUMN]) {
 	bool hasPositive = true;
 	for (int i = 0; i < ROW; i++) {
 		if (matrix[i][0] < 0)
@@ -76,15 +76,17 @@ string HasPositive(int matrix[ROW][COLUMN]) {
 	return result;
 
 }
-int Menu() {
+int PrintMenu() {
 	setlocale(LC_ALL, "Rus");
 	int matrix[ROW][COLUMN] = {};
 	FillMatrix(matrix, ROW, COLUMN);
 	PrintMatrix(matrix, ROW, COLUMN);
 	cout << "\nВыберите пункт\n"
-		"1. В каждой строке матрицы найти сумму элементов, находящихся в диапазоне между двумя заданными числами\n"
+		"1. В каждой строке матрицы найти сумму элементов, находящихся в диапазоне 
+		между двумя заданными числами\n"
 		"2. Проверить, есть ли в матрице строка из положительных чисел\n"
-		"3. Вычислить сумму элементов матрицы, выделенных чёрным цветом(матрица квадратная)\n"
+		"3. Вычислить сумму элементов матрицы, выделенных чёрным цветом(матрица 
+		квадратная)\n"
 		"4. Вывести все пункты задания\n";
 
 	int id;
@@ -93,18 +95,19 @@ int Menu() {
 	{
 	case 1:
 
-		cout << SumOfElements(matrix);
+		cout << FindSumOfElements(matrix);
 		break;
 	case 2:
-		cout << HasPositive(matrix);
+		cout << CheckHasPositive(matrix);
 		break;
 	case 3:
-		cout << SumOfUpperTriangularMatrix(matrix);
+		cout << FindSumOfUpperTriangularMatrix(matrix);
 		break;
 	case 4:
-		cout << "Результат пункта <А> = " << SumOfElements(matrix) << "\n";
-		cout << HasPositive(matrix);
-		cout << "Результат пункта <В> = " << SumOfUpperTriangularMatrix(matrix) << '\n';
+		cout << "Результат пункта <А> = " << FindSumOfElements(matrix) << "\n";
+		cout << CheckHasPositive(matrix);
+		cout << "Результат пункта <В> = " << FindSumOfUpperTriangularMatrix(matrix) <<
+			'\n';
 
 		break;
 	default:
@@ -112,15 +115,14 @@ int Menu() {
 		cout << "Неверно выбранная команда меню\n";
 		cout << "Попробуй выбрать число от 1 до 4\n";
 
-		return Menu();
+		return PrintMenu();
 	}
 	return 0;
 }
 
-
 int main()
 {
-	Menu();
+	PrintMenu();
 	return 0;
 
 }
